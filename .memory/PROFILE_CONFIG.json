@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "scheduleType": "interval",
+  "fixedTime": "02:00",
+  "intervalValue": 10,
+  "intervalUnit": "minutes"
+}

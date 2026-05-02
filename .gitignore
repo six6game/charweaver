@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Next.js build
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+prisma/dev.db
+prisma/dev.db-journal
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache/
+tsconfig.tsbuildinfo
+
+# Temporary files generated during repairs
+_fix_*.js
+_fix_*.txt
+_verify_*.js
+_verify_*.txt
+_install_*.js
+_enc_result.txt
+rename-complete.md
+
+# WorkBuddy
+.workbuddy/

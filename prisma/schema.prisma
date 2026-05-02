@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Agent {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  avatar      String?
+  avatarColor String   @default("#6366f1")
+  
+  // 基础设定
+  greeting    String?   // 开场白
+  personality String?   // 性格描述
+  background  String?   // 背景故事
+  
+  // 心智模型 (存为JSON字符串)
+  mentalModels String?   // [{"name": "模型名称", "description": "描述", "example": "应用示例"}]
+  
+  // 决策启发式
+  heuristics   String?   // [{"rule": "如果X则Y", "scenario": "适用场景"}]
+  
+  // 表达DNA
+  expressionDNA String?  // {"vocabulary": ["词1", "词2"], "phrases": ["口头禅"], "style": "风格描述"}
+  
+  // 价值观
+  values       String?   // [{"value": "价值1", "priority": 1}, {"value": "价值2", "priority": 2}]
+  
+  // 反模式 (不应该做的事)
+  antiPatterns String?   // ["不应该做的事1", "不应该做的事2"]
+  
+  // 内在张力
+  tensions     String?   // [{"left": "矛盾A", "right": "矛盾B", "description": "冲突描述"}]
+  
+  // 知识边界
+  knowledgeBoundary String? // {"known": ["知道的事"], "unknown": ["不知道的事"]}
+  
+  // 原始系统提示词 (用于直接覆盖)
+  systemPrompt String  @default("")
+  
+  // AI参数
+  temperature Float    @default(0.7)
+  maxTokens   Int      @default(4096)
+  model       String   @default("deepseek-chat")
+  isDefault   Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  chats       Chat[]
+}
+
+model Chat {
+  id        String   @id @default(cuid())
+  title     String   @default("新对话")
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  messages  Message[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  role      String   // "user" | "assistant" | "system"
+  content   String
+  model     String?
+  metadata  String?  // JSON: { attachments?: [...], reasoning?: boolean, webSearch?: boolean }
+  createdAt DateTime @default(now())
+}
+
+model ModelConfig {
+  id         String   @id @default(cuid())
+  provider   String   // "deepseek" | "openai" | "openai-generic" | "grok" | "anthropic" | "ollama"
+  name       String   // 模型名称
+  apiKey     String?
+  baseUrl    String   @default("")
+  enabled    Boolean  @default(true)
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([provider, name])
+}
