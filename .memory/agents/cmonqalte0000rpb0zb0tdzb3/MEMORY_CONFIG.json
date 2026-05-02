@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "scheduleType": "interval",
-  "fixedTime": "02:00",
-  "intervalValue": 1,
-  "intervalUnit": "hours",
-  "lastUpdated": "2026-05-02T14:45:58.794Z"
-}
