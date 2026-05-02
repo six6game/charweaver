@@ -35,8 +35,8 @@ if %errorlevel% neq 0 (
     exit /b 0
 )
 
-echo [3/3] Pushing to GitHub...
-git push
+echo [3/3] Pushing to GitHub (via proxy)...
+git -c http.proxy=socks5://127.0.0.1:7897 push
 
 if %errorlevel% equ 0 (
     echo.
