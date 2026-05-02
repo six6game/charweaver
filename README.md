@@ -1,6 +1,6 @@
 # CharWeaver 🎭
 
-> 多角色 · 多模型 · 多会话 —— 下一代 AI 助手平台
+> 多角色 · 多模型 · 多会话 —— AI 助手平台
 
 **CharWeaver**（原名 Agent Web）是一个功能丰富的 AI 对话平台，支持**自定义角色（Agent）系统**、**多模型切换**（DeepSeek / OpenAI / Anthropic / Grok / Ollama）、**推理模式**、**联网搜索**、**语音合成（TTS）**、**自动记忆与用户画像分析**等能力。开箱即用，支持 Windows 一键部署和 Linux 管理脚本。
 
